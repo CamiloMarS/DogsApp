@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { ADD_TODO, START_COUNT } from "../actions/type-actions";
 import initialState from "../state/index";
 import getDog from "../reducers/reducerPets";
+import photos from "../reducers/photoReducer";
 
 //Agregar todo
 function todos(state = initialState["todos"], action) {
@@ -35,7 +36,8 @@ function startCount(state = initialState["userInterface"], action) {
 const reducers = combineReducers({
   todos,
   startCount,
-  getDog
+  getDog,
+  photos
 });
 
 export default reducers;

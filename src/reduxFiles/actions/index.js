@@ -4,7 +4,10 @@ import {
   START_COUNT,
   API_CALL_SUCCESS,
   API_CALL_FAILURE,
-  API_CALL_REQUEST
+  API_CALL_REQUEST,
+  API_FAILURE_PHOTO,
+  API_REQUEST_PHOTO,
+  API_SUCCESS_PHOTO
 } from "../actions/type-actions";
 
 /**
@@ -32,10 +35,10 @@ function startCount(bool) {
 /**
  * @function reducer Pet
  */
-function apiCallSuccess(dog) {
+function apiCallSuccess(object) {
   return {
     type: API_CALL_SUCCESS,
-    payload: dog
+    payload: object
   };
 }
 
@@ -52,4 +55,32 @@ function apiCallRequest() {
   };
 }
 
-export { addTodo, startCount, apiCallFailure, apiCallSuccess, apiCallRequest };
+const actionsPhotos = {
+  apiSuccessPhoto: function(photos) {
+    return {
+      type: API_SUCCESS_PHOTO,
+      payload: photos
+    };
+  },
+  apiFailurePhoto: function(error) {
+    return {
+      type: API_FAILURE_PHOTO,
+      payload: error
+    };
+  },
+  apiRequestPhoto: function() {
+    console.log("ACTION ACTIVE");
+    return {
+      type: API_REQUEST_PHOTO
+    };
+  }
+};
+
+export {
+  addTodo,
+  startCount,
+  apiCallFailure,
+  apiCallSuccess,
+  apiCallRequest,
+  actionsPhotos
+};

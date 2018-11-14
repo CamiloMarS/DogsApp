@@ -1,30 +1,62 @@
 import React, { Component } from "react";
-import Participante from "./components/Participante";
-//import Publicacion from "./components/Publicacion";
-//import Pet from "./components/Pet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { apiCallRequest } from "./reduxFiles/actions";
-import UserMessage from "./components/Message";
+import { apiCallRequest, actionsPhotos } from "./reduxFiles/actions";
 
+//Componentes
+import Participante from "./components/Participante";
+import UserMessage from "./components/Message";
+import HeaderApp from "./components/HeaderApp";
+import LogoApp from "./components/LogoApp";
+import MenuApp from "./components/MenuNav";
+
+//Containers
+import PhotosContainer from "./containers/PhotosContainer";
+
+//Opciones del Menú
+const menu = [
+  { text: "Home", link: "/home" },
+  { text: "Pets", link: "/pets" },
+  { text: "Photos", link: "/photos" },
+  { text: "Music", link: "/music" },
+  { text: "Todos", link: "/todos" },
+  { text: "Contacts", link: "/contacts" }
+];
+
+const logo = {
+  url: "/home",
+  image:
+    "https://sngular.com/wp-content/uploads/2017/04/logo-header-sngular-web.png"
+};
+
+//Component App
 class App extends Component {
   getANewPet = () => {
-    const { onRequest } = this.props;
+    const { onRequest, getPhoto } = this.props;
     onRequest();
+    //getPhoto();
   };
 
   render() {
-    const { fetching, dog } = this.props;
+    const { dog, loadingPhotos } = this.props; //Props del store
+
     return (
       <div className="App">
-        {fetching === false ? (
+        <HeaderApp
+          logo={<LogoApp url={logo.url} image={logo.image} />}
+          listOptions={<MenuApp options={menu} />}
+        />
+
+        {loadingPhotos === false ? (
           ""
         ) : (
-          <UserMessage color="yellow" title="Message" message="Loading" />
+          <UserMessage color="yellow" title="Message" message="Loading..." />
         )}
-        <Participante name="Pet" avatar={dog} />
-        <button onClick={this.getANewPet}>Get Pet</button>
-        {/*<Pet picture="" namepet="otro" />*/}
+
+        <Participante name="Pet" avatar={dog}>
+          <button onClick={this.getANewPet}>Obtener perro</button>
+        </Participante>
+        <PhotosContainer />
       </div>
     );
   }
@@ -32,9 +64,12 @@ class App extends Component {
 
 const mapStateToProps = state => {
   const {
+    photos: { loading },
+
     getDog: { fetching, dog, error }
   } = state;
   return {
+    loadingPhotos: loading,
     fetching,
     dog,
     errorRequest: error
@@ -44,7 +79,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      onRequest: apiCallRequest
+      onRequest: apiCallRequest,
+      getPhoto: actionsPhotos.apiRequestPhoto
     },
     dispatch
   );

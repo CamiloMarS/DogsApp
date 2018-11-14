@@ -1,0 +1,21 @@
+/**
+* Styles for HeaderApp
+**/
+
+.contentHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgb(5, 11, 71);
+  border-bottom: 1px groove #ccc;
+}
+
+.contentLogo {
+  margin-left: 2%;
+  max-width: 200px;
+}
+.contentOptions {
+  margin-right: 2%;
+}
