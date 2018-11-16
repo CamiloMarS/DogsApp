@@ -10,9 +10,12 @@ import axios from "axios";
 function fetchPhoto() {
   return axios({
     method: "get",
-    url: `https://jsonplaceholder.typicode.com/photos/`
+    url: "https://jsonplaceholder.typicode.com/photos/"
   });
 }
+//https://swapi.co/api/people/1/
+//https://jsonplaceholder.typicode.com/photos/ --> fotos
+//https://jsonplaceholder.typicode.com/albums ---> Albums
 
 function* workerSaga() {
   try {

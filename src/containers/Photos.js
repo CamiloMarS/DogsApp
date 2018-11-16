@@ -1,75 +1,90 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionsPhotos } from "../reduxFiles/actions/index";
+import {
+  actionsPhotos,
+  actionsAlbums,
+  filterPhotosAlbum
+} from "../reduxFiles/actions/index";
 
 //Components
 import AlbumList from "../components/AlbumList";
 //import Photo from "../components/Photo";
 import UserMessage from "../components/Message";
-
-//Function for get Albums List
-const getByDifferentAlbum = list => {
-  Array.prototype.unique = (function(a) {
-    return function() {
-      return this.filter(a);
-    };
-  })(function(a, b, c) {
-    return c.indexOf(a, b + 1) < 0;
-  });
-
-  if (list.length > 0) {
-    let actual = 1;
-
-    const albums = [];
-    for (let current of list) {
-      if (current.albumId !== actual) {
-        actual = current.albumId;
-      } else albums.push(current.albumId);
-    }
-
-    return albums.unique();
-  }
-};
+import PhotoList from "../components/PhotoList";
 
 //Contenedor
 class Photos extends Component {
   componentDidMount() {
-    //Realizar la petición al server
-    const { getAlbumsList } = this.props;
+    //Solicitad los albunes
+    const { getAlbumsList, getPhotoList } = this.props;
     getAlbumsList();
+    getPhotoList();
   }
 
-  showUserMessage = () => {
-    const { loading, albums } = this.props;
+  componentWillUnmount() {
+    console.log("Eliminando el componente");
+  }
 
+  //Funcion para solicitar las fotos del album
+  getRequestPhotosAlbum = idAlbum => {
+    console.log("Photos del Album: ", idAlbum);
+    const { photoList, filterByAlbumPhotos } = this.props;
+    filterByAlbumPhotos({ album: idAlbum, photoList });
+  };
+
+  showUserMessage = () => {
+    /** Muestra el mensaje de usuario o carga la lista de albums */
+    const { loading, albums } = this.props;
     return loading ? (
       <UserMessage color="#ccc" title="User Message" message="Loading ..." />
     ) : (
-      <AlbumList albums={getByDifferentAlbum(albums)} />
+      <AlbumList albums={albums} onclick={this.getRequestPhotosAlbum} />
     );
+  };
+
+  showPhotosAlbum = () => {
+    const { photos } = this.props;
+    return <PhotoList photosCollection={photos} />;
   };
 
   render() {
     //Props de store
-    return <div style={{ padding: "5px" }}>{this.showUserMessage()}</div>;
+    return (
+      <div
+        style={{
+          padding: "5px",
+          display: "flex",
+          justifyContent: "space-between"
+        }}
+      >
+        {this.showUserMessage()}
+        {this.showPhotosAlbum()}
+      </div>
+    );
   }
 }
 
 //Conectar el componente con el store
 const mapStateToProps = state => {
-  const { loading, list, message } = state.photos;
+  const { loading, list, message, photos } = state.albums;
   return {
     albums: list,
     loading,
-    message
+    message,
+    photos,
+    photoLoading: state.photos.loading,
+    photoList: state.photos.list,
+    photoMessage: state.photos.message
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      getAlbumsList: actionsPhotos.apiRequestPhoto
+      getAlbumsList: actionsAlbums.apiRequestAlbum,
+      getPhotoList: actionsPhotos.apiRequestPhoto,
+      filterByAlbumPhotos: filterPhotosAlbum
     },
     dispatch
   );

@@ -6,6 +6,12 @@ const state = {
     list: [],
     message: ""
   },
+  albums: {
+    loading: false,
+    list: [],
+    message: "",
+    photos: []
+  },
   getDog: {
     fetching: false,
     dog: null,

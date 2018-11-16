@@ -2,13 +2,17 @@
 import {
   ADD_TODO,
   START_COUNT,
+  FILTER_PHOTOS_ALBUM,
   API_CALL_SUCCESS,
   API_CALL_FAILURE,
   API_CALL_REQUEST,
   API_FAILURE_PHOTO,
   API_REQUEST_PHOTO,
   API_SUCCESS_PHOTO,
-  CHANGE_UI
+  CHANGE_UI,
+  API_REQUEST_ALBUM,
+  API_SUCCESS_ALBUM,
+  API_FAILURE_ALBUM
 } from "../actions/type-actions";
 
 /**
@@ -30,6 +34,13 @@ function startCount(bool) {
   return {
     type: START_COUNT,
     payload: bool
+  };
+}
+
+function filterPhotosAlbum(object) {
+  return {
+    type: FILTER_PHOTOS_ALBUM,
+    payload: { ...object }
   };
 }
 
@@ -77,19 +88,37 @@ const actionsPhotos = {
     };
   },
   apiRequestPhoto: function() {
-    console.log("ACTION ACTIVE");
     return {
       type: API_REQUEST_PHOTO
     };
   }
 };
 
+const actionsAlbums = {
+  apiRequestAlbum: function() {
+    return {
+      type: API_REQUEST_ALBUM
+    };
+  },
+  apiSuccessAlbum: function(albums) {
+    return {
+      type: API_SUCCESS_ALBUM,
+      payload: albums
+    };
+  },
+  apiFailureAlbums: function(error) {
+    return { type: API_FAILURE_ALBUM, payload: error };
+  }
+};
+
 export {
   addTodo,
   startCount,
+  filterPhotosAlbum,
   apiCallFailure,
   apiCallSuccess,
   apiCallRequest,
   actionsPhotos,
+  actionsAlbums,
   changeUi
 };
