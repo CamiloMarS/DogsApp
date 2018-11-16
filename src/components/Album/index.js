@@ -4,7 +4,7 @@ const styles = {
   album: {
     width: "100px",
     height: "120px",
-    backgroundColor: "whitesmoke",
+    backgroundColor: "#ddd",
     boxShadow: "5px 4px 0px #ccc",
     display: "flex",
     alignItems: "center",

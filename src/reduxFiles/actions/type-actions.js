@@ -3,6 +3,8 @@
 export const START_COUNT = "START_COUNT";
 export const ADD_TODO = "ADD_TODO";
 
+export const CHANGE_UI = "CHANGE_UI";
+
 //Acciones para los perros
 export const API_CALL_REQUEST = "API_CALL_REQUEST";
 export const API_CALL_SUCCESS = "API_CALL_SUCCESS";

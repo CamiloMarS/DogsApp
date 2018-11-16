@@ -1,29 +1,27 @@
 import React, { Component } from "react";
-
+import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 //Acciones
-import { apiCallRequest, actionsPhotos } from "./reduxFiles/actions";
+import { changeUi } from "./reduxFiles/actions/index";
+
+//Route
+import Root from "./Route";
 
 //Componentes
-import Participante from "./components/Participante";
-import UserMessage from "./components/Message";
 import HeaderApp from "./components/HeaderApp";
 import LogoApp from "./components/LogoApp";
 import MenuApp from "./components/MenuNav";
 
-//Containers
-import PhotosContainer from "./containers/PhotosContainer";
-
 //Opciones del Menú
 const menu = [
-  { text: "Home", link: "/home" },
-  { text: "Pets", link: "/pets" },
-  { text: "Photos", link: "/photos" },
-  { text: "Music", link: "/music" },
-  { text: "Todos", link: "/todos" },
-  { text: "Contacts", link: "/contacts" }
+  { text: "Home", link: "home" },
+  { text: "Pets", link: "pets" },
+  { text: "Photos", link: "photos" },
+  { text: "Music", link: "music" },
+  { text: "Todos", link: "todos" },
+  { text: "Contacts", link: "contacts" }
 ];
 
 const logo = {
@@ -34,56 +32,39 @@ const logo = {
 
 //Component App
 class App extends Component {
-  getANewPet = () => {
-    const { onRequest, getPhoto } = this.props;
-    onRequest();
-    //getPhoto();
+  changingUI = proxUI => {
+    const { changeProxUI } = this.props;
+    changeProxUI(proxUI);
   };
 
   render() {
-    const { dog, loadingPhotos } = this.props; //Props del store
-
+    const { currentUi } = this.props;
     return (
-      <div className="App">
-        <HeaderApp
-          logo={<LogoApp url={logo.url} image={logo.image} />}
-          listOptions={<MenuApp options={menu} />}
-        />
-
-        {loadingPhotos === false ? (
-          ""
-        ) : (
-          <UserMessage color="yellow" title="Message" message="Loading..." />
-        )}
-
-        <Participante name="Pet" avatar={dog}>
-          <button onClick={this.getANewPet}>Obtener perro</button>
-        </Participante>
-        <PhotosContainer />
-      </div>
+      <Router>
+        <div>
+          <HeaderApp
+            logo={<LogoApp image={logo.image} url={logo.url} />}
+            listOptions={
+              <MenuApp options={menu} changeCurrentUI={this.changingUI} />
+            }
+          />
+          <Root name={currentUi} />
+        </div>
+      </Router>
     );
   }
 }
 
 const mapStateToProps = state => {
-  const {
-    photos: { loading },
-
-    getDog: { fetching, dog, error }
-  } = state;
   return {
-    loadingPhotos: loading,
-    fetching,
-    dog,
-    errorRequest: error
+    currentUi: state.startCount["currentUI"]
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      onRequest: apiCallRequest,
-      getPhoto: actionsPhotos.apiRequestPhoto
+      changeProxUI: changeUi
     },
     dispatch
   );

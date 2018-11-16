@@ -11,8 +11,12 @@ const state = {
     dog: null,
     error: null
   },
-  userInterface: {
+  startCount: {
+    currentUI: "",
     countTime: false
+  },
+  contacts: {
+    list: []
   }
 };
 

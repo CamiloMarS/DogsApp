@@ -7,7 +7,8 @@ import {
   API_CALL_REQUEST,
   API_FAILURE_PHOTO,
   API_REQUEST_PHOTO,
-  API_SUCCESS_PHOTO
+  API_SUCCESS_PHOTO,
+  CHANGE_UI
 } from "../actions/type-actions";
 
 /**
@@ -55,6 +56,13 @@ function apiCallRequest() {
   };
 }
 
+function changeUi(route) {
+  return {
+    type: CHANGE_UI,
+    payload: route
+  };
+}
+
 const actionsPhotos = {
   apiSuccessPhoto: function(photos) {
     return {
@@ -82,5 +90,6 @@ export {
   apiCallFailure,
   apiCallSuccess,
   apiCallRequest,
-  actionsPhotos
+  actionsPhotos,
+  changeUi
 };

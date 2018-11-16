@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-const MenuNav = ({ options }) => (
+const MenuNav = ({ options, changeCurrentUI }) => (
   <ul style={{ listStyle: "none" }}>
     {options.map((option, i) => {
       return (
@@ -15,15 +16,16 @@ const MenuNav = ({ options }) => (
             height: "100%"
           }}
         >
-          <a
-            href={option.link}
+          <Link
+            to={option.text.toLowerCase()}
             style={{
               textDecoration: "none",
               color: "whitesmoke"
             }}
+            onClick={() => changeCurrentUI(option.link)}
           >
             {option.text}
-          </a>
+          </Link>
         </li>
       );
     })}
