@@ -6,7 +6,7 @@ const Photo = ({ albumId, id, title, url, thumbnaiUrl }) => {
     <div
       style={{
         width: "200px",
-        height: "300px",
+        height: "210px",
         margin: "5px",
         backgroundImage: `url(${thumbnaiUrl})`,
         backgroundPosition: "cover",
@@ -20,7 +20,6 @@ const Photo = ({ albumId, id, title, url, thumbnaiUrl }) => {
           <span>{id}</span>
           {title}
         </p>
-        <p>{url}</p>
       </div>
     </div>
   );

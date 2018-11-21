@@ -12,7 +12,11 @@ import {
   CHANGE_UI,
   API_REQUEST_ALBUM,
   API_SUCCESS_ALBUM,
-  API_FAILURE_ALBUM
+  API_FAILURE_ALBUM,
+  SELECT_SUBREDDIT,
+  INVALID_SUBREDDIT,
+  REQUEST_POST,
+  RECEIVE_POST
 } from "../actions/type-actions";
 
 /**
@@ -111,6 +115,37 @@ const actionsAlbums = {
   }
 };
 
+//Todos
+const selectSubreddit = subreddit => {
+  return {
+    type: SELECT_SUBREDDIT,
+    subreddit
+  };
+};
+
+const invalidSubreddit = subreddit => {
+  return {
+    type: INVALID_SUBREDDIT,
+    subreddit
+  };
+};
+
+const requestPost = subreddit => {
+  return {
+    type: REQUEST_POST,
+    subreddit
+  };
+};
+
+const receivePost = (subreddit, json) => {
+  return {
+    type: RECEIVE_POST,
+    subreddit,
+    post: json.data.children.map(child => child.data),
+    receive: Date.now()
+  };
+};
+
 export {
   addTodo,
   startCount,
@@ -120,5 +155,9 @@ export {
   apiCallRequest,
   actionsPhotos,
   actionsAlbums,
-  changeUi
+  changeUi,
+  selectSubreddit,
+  invalidSubreddit,
+  requestPost,
+  receivePost
 };

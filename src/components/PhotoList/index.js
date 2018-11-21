@@ -7,14 +7,16 @@ const PhotoList = ({ photosCollection }) => {
   return (
     <div
       style={{
-        width: "55%"
+        width: "70%"
       }}
     >
-      <h2>Album List</h2>
+      <h2>Photo List</h2>
       <div
         style={{
           display: "flex",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
+          maxHeight: "80vh",
+          overflow: "auto"
         }}
       >
         {isEmpty(photosCollection) === false ? (

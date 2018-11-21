@@ -9,9 +9,16 @@ import {
 
 //Components
 import AlbumList from "../components/AlbumList";
-//import Photo from "../components/Photo";
 import UserMessage from "../components/Message";
 import PhotoList from "../components/PhotoList";
+
+const styles = {
+  container: {
+    padding: "5px",
+    display: "flex",
+    justifyContent: "space-between"
+  }
+};
 
 //Contenedor
 class Photos extends Component {
@@ -33,7 +40,7 @@ class Photos extends Component {
     filterByAlbumPhotos({ album: idAlbum, photoList });
   };
 
-  showUserMessage = () => {
+  loadAlbumsList = () => {
     /** Muestra el mensaje de usuario o carga la lista de albums */
     const { loading, albums } = this.props;
     return loading ? (
@@ -51,14 +58,8 @@ class Photos extends Component {
   render() {
     //Props de store
     return (
-      <div
-        style={{
-          padding: "5px",
-          display: "flex",
-          justifyContent: "space-between"
-        }}
-      >
-        {this.showUserMessage()}
+      <div style={styles.container}>
+        {this.loadAlbumsList()}
         {this.showPhotosAlbum()}
       </div>
     );

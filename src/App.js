@@ -19,9 +19,7 @@ const menu = [
   { text: "Home", link: "home" },
   { text: "Pets", link: "pets" },
   { text: "Photos", link: "photos" },
-  { text: "Music", link: "music" },
-  { text: "Todos", link: "todos" },
-  { text: "Contacts", link: "contacts" }
+  { text: "Todos", link: "todos" }
 ];
 
 const logo = {

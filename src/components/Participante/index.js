@@ -7,7 +7,8 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    margin: "5px auto"
   },
   picture: {
     width: "100px",

@@ -9,23 +9,30 @@ import UserMessage from "../components/Message";
 //Acciones
 import { apiCallRequest } from "../reduxFiles/actions";
 
+const styles = {
+  content: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center"
+  }
+};
+
 class Pets extends Component {
   getANewPet = () => {
     const { onRequest } = this.props;
     onRequest();
   };
 
+  componentWillUnmount() {
+    console.log("El component se quitará!");
+  }
+
   render() {
     const { dog, fetching } = this.props; //Props del store
 
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column"
-        }}
-      >
+      <div style={styles.content}>
         {fetching === false ? (
           ""
         ) : (

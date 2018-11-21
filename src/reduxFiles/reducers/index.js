@@ -6,19 +6,15 @@ import getDog from "../reducers/reducerPets";
 import photos from "../reducers/photoReducer";
 import albums from "../reducers/albumReducer";
 
-//Agregar todo
 function todos(state = initialState["todos"], action) {
   switch (action.type) {
     case ADD_TODO: {
-      return Object.assign({}, state, {
-        todos: [...state, { ...action["payload"] }]
-      });
+      return Object.assign([], state, [...state, { ...action.payload }]);
     }
     default:
       return state;
   }
 }
-
 //Comenzar conteo
 function startCount(state = initialState["startCount"], action) {
   switch (action.type) {

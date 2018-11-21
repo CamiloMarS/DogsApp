@@ -6,12 +6,14 @@ import { Route } from "react-router-dom";
 import Home from "../containers/Home";
 import Pets from "../containers/Pets";
 import Photos from "../containers/Photos";
+import Todos from "../containers/Todos";
 
 const CONTAINERS = [
   { id: 1, name: "", container: Home },
   { id: 2, name: "home", container: Home },
   { id: 3, name: "pets", container: Pets },
-  { id: 4, name: "photos", container: Photos }
+  { id: 4, name: "photos", container: Photos },
+  { id: 5, name: "todos", container: Todos }
 ];
 
 const find = name => {
