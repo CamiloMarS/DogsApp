@@ -1,6 +1,11 @@
 /** Reductores */
 import { combineReducers } from "redux";
-import { ADD_TODO, START_COUNT, CHANGE_UI } from "../actions/type-actions";
+import {
+  ADD_TODO,
+  CHANGE_STATUS_TODO,
+  START_COUNT,
+  CHANGE_UI
+} from "../actions/type-actions";
 import initialState from "../state/index";
 import getDog from "../reducers/reducerPets";
 import photos from "../reducers/photoReducer";
@@ -10,6 +15,14 @@ function todos(state = initialState["todos"], action) {
   switch (action.type) {
     case ADD_TODO: {
       return Object.assign([], state, [...state, { ...action.payload }]);
+    }
+    case CHANGE_STATUS_TODO: {
+      return state.map(todo => {
+        if (todo.id === action.payload) {
+          todo.complete = true;
+        }
+        return todo;
+      });
     }
     default:
       return state;

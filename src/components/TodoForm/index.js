@@ -15,9 +15,11 @@ class TodoForm extends React.PureComponent {
     const { descriptionTodo, completed } = this;
     if (descriptionTodo.current["value"] !== "") {
       this.props.getNewTodo({
+        id: Math.trunc(Math.random() * (10000 - 1) + 1),
         description: descriptionTodo.current["value"],
-        completed: completed.current.checked
+        complete: completed.current.checked
       });
+      descriptionTodo.current.value = "";
     }
   };
 

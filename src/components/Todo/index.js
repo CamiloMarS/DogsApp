@@ -3,25 +3,23 @@ import PropTypes from "prop-types";
 
 const Todo = ({ text, completed }) => {
   return (
-    <span
+    <label
       style={{
-        padding: "5px",
+        padding: "2rem",
         maxWidth: "25%",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "rgba(120,22,230, .6)"
+        borderBottom: "1px dotted #ccc"
       }}
     >
-      <span>Todo: {text} </span>
-      <span style={{ fontSize: "10px" }}>
-        {completed === true ? "Status: completed" : "Status: Incompleted"}
-      </span>
-    </span>
+      <span style={{ fontSize: "20px" }}>Todo: {text} </span>
+      {completed}
+    </label>
   );
 };
 
 Todo.propTypes = {
   text: PropTypes.string.isRequired,
-  completed: PropTypes.bool.isRequired
+  completed: PropTypes.element.isRequired
 };
 export default Todo;

@@ -2,6 +2,7 @@
 
 export const START_COUNT = "START_COUNT";
 export const ADD_TODO = "ADD_TODO";
+export const CHANGE_STATUS_TODO = "CHANGE_STATUS_TODO";
 export const CHANGE_UI = "CHANGE_UI";
 
 //Acciones para los perros

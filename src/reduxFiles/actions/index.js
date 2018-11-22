@@ -1,6 +1,7 @@
 /** CREADORES DE ACCIONES */
 import {
   ADD_TODO,
+  CHANGE_STATUS_TODO,
   START_COUNT,
   FILTER_PHOTOS_ALBUM,
   API_CALL_SUCCESS,
@@ -27,6 +28,13 @@ function addTodo(todo) {
   return {
     type: ADD_TODO,
     payload: todo
+  };
+}
+
+function changeStatusTodo(idTodo) {
+  return {
+    type: CHANGE_STATUS_TODO,
+    payload: idTodo
   };
 }
 
@@ -148,6 +156,7 @@ const receivePost = (subreddit, json) => {
 
 export {
   addTodo,
+  changeStatusTodo,
   startCount,
   filterPhotosAlbum,
   apiCallFailure,
