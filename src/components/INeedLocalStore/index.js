@@ -35,6 +35,10 @@ class ComponentNeedingStorage extends React.Component {
   }
 } //end class
 
+ComponentNeedingStorage.defaultProps = {
+  load: (key => localStorage.getItem(key))()
+};
+
 const WrappedComponent = withStore(ComponentNeedingStorage);
 
 export default WrappedComponent;

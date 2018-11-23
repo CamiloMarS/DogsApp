@@ -22,7 +22,7 @@ class Home extends Component {
           picture="https://www.henhudschools.org/cms/lib/NY01813707/Centricity/Domain/1429/Welcome%202.jpg"
           message="UI Principal"
         />
-        <WrappedComponent reallyLongApiCall={_fetch} load={getData} />
+        <WrappedComponent reallyLongApiCall={_fetch} />
       </div>
     );
   }
